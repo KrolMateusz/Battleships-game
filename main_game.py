@@ -1,3 +1,5 @@
+import string
+
 def generate_empty_map(size):
     battlefield = {}
     for letter in 'ABCDEFGHIJ':
@@ -29,14 +31,31 @@ def generate_ships():
     return ships
 
 
+def check_arrangement(ship_start, ship_end, ship_len):
+    alphabet = string.ascii_uppercase
+    ship_start_letter, ship_start_number = ship_start
+    ship_start_letter_index = alphabet.index(ship_start_letter)
+    ship_end_letter, ship_end_number = ship_end
+    ship_end_letter_index = alphabet.index(ship_end_letter)
+    if not(0 < ship_start_number < 11) or (0 < ship_end_number < 11):
+        return False
+    # Walidacja pozioma
+    if ship_start_letter != ship_end_letter:
+        if ship_start_number == ship_end_number:
+            if (ship_start_letter_index - ship_end_letter_index == ship_len - 1 or 
+                    ship_start_letter_index - ship_end_letter_index == -ship_len + 1):
+                return True
+    return False
+
+
 def place_ships(ships_to_place):
     while ships_to_place:
         ship_size = list(ships_to_place.keys())[0]
         ship_placed = 0
         while ship_placed < ships_to_place[ship_size]:
-            for ship_frag in range(ship_size):
-                print(ship_frag)
-            # Walidacja
+            print('Podaj pozycję statku o rozmiarze ', ship_size)
+            start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
+            print(start_pos, end_pos, check_arrangement(start_pos, end_pos, ship_size))
             ship_placed += 1
         ships_to_place.pop(ship_size)
 

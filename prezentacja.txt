@@ -1,0 +1,7 @@
+o - pudło
+x - trafiony
+@ - zatopiony
+. - pole, w które można oddać strzał
+s - statek
+
+Listy zagnieżdżone, czy słownik o kluczach (a, b, c, d...) z odpowiadającą listą

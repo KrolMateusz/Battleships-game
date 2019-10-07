@@ -26,7 +26,6 @@ def generate_ships():
         4: 1,
         3: 1,
         2: 1,
-        1: 1,
     }
     return ships
 
@@ -37,14 +36,16 @@ def check_arrangement(ship_start, ship_end, ship_len):
     ship_start_letter_index = alphabet.index(ship_start_letter)
     ship_end_letter, ship_end_number = ship_end
     ship_end_letter_index = alphabet.index(ship_end_letter)
-    if not(0 < ship_start_number < 11) or (0 < ship_end_number < 11):
-        return False
     # Walidacja pozioma
-    if ship_start_letter != ship_end_letter:
-        if ship_start_number == ship_end_number:
-            if (ship_start_letter_index - ship_end_letter_index == ship_len - 1 or 
-                    ship_start_letter_index - ship_end_letter_index == -ship_len + 1):
-                return True
+    if ship_start_number == ship_end_number:
+        if (ship_start_letter_index - ship_end_letter_index == ship_len - 1 or 
+                ship_start_letter_index - ship_end_letter_index == -ship_len + 1):
+            return True
+    # Walidacja pionowa
+    if ship_start_letter == ship_end_letter:
+        if (int(ship_start_number) - int(ship_end_number) == ship_len - 1 or
+                int(ship_start_number) - int(ship_end_number) == -ship_len + 1):
+            return True
     return False
 
 
@@ -55,8 +56,9 @@ def place_ships(ships_to_place):
         while ship_placed < ships_to_place[ship_size]:
             print('Podaj pozycję statku o rozmiarze ', ship_size)
             start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
-            print(start_pos, end_pos, check_arrangement(start_pos, end_pos, ship_size))
-            ship_placed += 1
+            if check_arrangement(start_pos, end_pos, ship_size):
+                ship_placed += 1
+                print(start_pos, end_pos)
         ships_to_place.pop(ship_size)
 
 

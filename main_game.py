@@ -31,13 +31,13 @@ def generate_ships():
 
 def place_ships(ships_to_place):
     while ships_to_place:
-        for ship_size in ships_to_place:
-            ship_placed = 0
-            while ship_placed < ships_to_place[ship_size]:
-                for ship_frag in range(ship_size):
-                    print(ship_frag)
-                # Walidacja
-                ship_placed += 1
+        ship_size = list(ships_to_place.keys())[0]
+        ship_placed = 0
+        while ship_placed < ships_to_place[ship_size]:
+            for ship_frag in range(ship_size):
+                print(ship_frag)
+            # Walidacja
+            ship_placed += 1
         ships_to_place.pop(ship_size)
 
 

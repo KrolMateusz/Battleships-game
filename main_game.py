@@ -3,7 +3,7 @@ import string
 def generate_empty_map(size):
     battlefield = {}
     for letter in 'ABCDEFGHIJ':
-        battlefield.setdefault(letter, ["s" for _ in range(size)])
+        battlefield.setdefault(letter, ["." for _ in range(size)])
     return battlefield
 
 

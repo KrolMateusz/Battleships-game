@@ -3,7 +3,7 @@ import string
 def generate_empty_map(size):
     battlefield = {}
     for letter in 'ABCDEFGHIJ':
-        battlefield.setdefault(letter, ["." for _ in range(size)])
+        battlefield.setdefault(letter, ["s" for _ in range(size)])
     return battlefield
 
 
@@ -30,7 +30,7 @@ def generate_ships():
     return ships
 
 
-def check_ship(ship_start, ship_end, ship_len):
+def check_ship_level(ship_start, ship_end, ship_len):
     alphabet = string.ascii_uppercase
     ship_start_letter, ship_start_number = ship_start[0], ship_start[1:]
     ship_start_letter_index = alphabet.index(ship_start_letter)
@@ -130,20 +130,22 @@ def check_ship_location(ship_coords, battlefield, level):
     return True
 
 
-def place_ships(ships_to_place):
+def place_ships(ships_to_place, battlefield):
     while ships_to_place:
         ship_size = list(ships_to_place.keys())[0]
         ship_placed = 0
         while ship_placed < ships_to_place[ship_size]:
             print('Podaj pozycję statku o rozmiarze ', ship_size)
             start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
-            vertical_or_horizontal = check_ship(start_pos, end_pos, ship_size)
+            vertical_or_horizontal = check_ship_level(start_pos, end_pos, ship_size)
             if vertical_or_horizontal:
                 ship_placed += 1
                 print(start_pos, end_pos, vertical_or_horizontal)
+                coords = get_coords(start_pos, end_pos, vertical_or_horizontal)
+                print(check_ship_location(coords, battlefield, vertical_or_horizontal))
         ships_to_place.pop(ship_size)
 
 
 if __name__ == "__main__":
     print_map(generate_empty_map(10))
-    place_ships(generate_ships())
+    place_ships(generate_ships(), generate_empty_map(10))

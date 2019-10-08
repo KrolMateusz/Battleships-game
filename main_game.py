@@ -130,6 +130,10 @@ def check_ship_location(ship_coords, battlefield, level):
     return True
 
 
+def put_ship_on_board():
+    pass
+
+
 def place_ships(ships_to_place, battlefield):
     while ships_to_place:
         ship_size = list(ships_to_place.keys())[0]
@@ -139,10 +143,11 @@ def place_ships(ships_to_place, battlefield):
             start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
             vertical_or_horizontal = check_ship_level(start_pos, end_pos, ship_size)
             if vertical_or_horizontal:
-                ship_placed += 1
                 print(start_pos, end_pos, vertical_or_horizontal)
                 coords = get_coords(start_pos, end_pos, vertical_or_horizontal)
                 print(check_ship_location(coords, battlefield, vertical_or_horizontal))
+                if check_ship_location(coords, battlefield, vertical_or_horizontal):
+                    ship_placed += 1
         ships_to_place.pop(ship_size)
 
 

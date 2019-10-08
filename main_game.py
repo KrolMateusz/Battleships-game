@@ -65,8 +65,17 @@ def get_coords(ship_start, ship_end, level):
     return ship_coords
 
 
-def locate_ships(ship_start, ship_end, battlefield):
-    pass
+def check_ship_location(ship_coords, battlefield, level):
+    alphabet = string.ascii_uppercase
+    # Sprawdzanie, czy w tym miejscu nie ma już innego statku
+    for coord in ship_coords:
+        row, col = coord
+        if battlefield[row][int(col)] != '.':
+            return False
+    # Sprawdzanie, czy w sąsiedztwie nie ma innego statku
+    if 'A' < ship_coords[0][0] < 'J':
+        pass
+    return True
 
 
 def place_ships(ships_to_place):

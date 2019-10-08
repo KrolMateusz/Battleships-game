@@ -32,9 +32,9 @@ def generate_ships():
 
 def check_ship(ship_start, ship_end, ship_len):
     alphabet = string.ascii_uppercase
-    ship_start_letter, ship_start_number = ship_start
+    ship_start_letter, ship_start_number = ship_start[0], ship_start[1:]
     ship_start_letter_index = alphabet.index(ship_start_letter)
-    ship_end_letter, ship_end_number = ship_end
+    ship_end_letter, ship_end_number = ship_end[0], ship_end[1:]
     ship_end_letter_index = alphabet.index(ship_end_letter)
     # Walidacja pionowa
     if ship_start_number == ship_end_number:
@@ -51,9 +51,9 @@ def check_ship(ship_start, ship_end, ship_len):
 
 def get_coords(ship_start, ship_end, level):
     alphabet = string.ascii_uppercase
-    ship_start_letter, ship_start_number = ship_start
+    ship_start_letter, ship_start_number = ship_start[0], ship_start[1:]
     ship_start_letter_index = alphabet.index(ship_start_letter)
-    ship_end_letter, ship_end_number = ship_end
+    ship_end_letter, ship_end_number = ship_end[0], ship_end[1:]
     ship_end_letter_index = alphabet.index(ship_end_letter)
     ship_coords = []
     if level == 'horizontal':

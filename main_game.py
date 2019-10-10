@@ -29,6 +29,19 @@ def generate_ships():
     }
     return ships
 
+def get_ship_pos(ship_len):
+    print('Podaj pozycję statku o rozmiarze ', ship_len)
+    start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
+    if end_pos[0] < start_pos[0]:
+        temp = end_pos
+        end_pos = start_pos
+        start_pos = temp
+    elif int(end_pos[1:]) < int(start_pos[1:]):
+        temp = end_pos
+        end_pos = start_pos
+        start_pos = temp
+    return start_pos, end_pos
+
 
 def check_ship_level(ship_start, ship_end, ship_len):
     alphabet = string.ascii_uppercase
@@ -98,14 +111,14 @@ def check_ship_location(ship_coords, battlefield, level):
             # Sprawdzanie, gdy statek jest przy górnej krawędzi planszy
             if row == 'A' and col != 0 and coord == ship_coords[0]:
                 if (battlefield[row][col - 1] == 's'
-                        or battlefield[previous_row][col - 1] == 's'):
+                        or battlefield[next_row][col - 1] == 's'):
                     return False
             if row == 'A' and col != 9 and coord == ship_coords[-1]:
                 if (battlefield[row][col + 1] == 's'
                         or battlefield[next_row][col + 1] == 's'):
                     return False
             if row == 'A':
-                if battlefield[previous_row][col] == 's':
+                if battlefield[next_row][col] == 's':
                     return False
             # Sprawdzanie, gdy statek jest przy dolnej krawędzi planszy
             if row == 'J' and col != 0 and coord == ship_coords[0]:
@@ -177,8 +190,7 @@ def place_ships(ships_to_place, battlefield):
         ship_size = list(ships_to_place.keys())[0]
         ships_placed = 0
         while ships_placed < ships_to_place[ship_size]:
-            print('Podaj pozycję statku o rozmiarze ', ship_size)
-            start_pos, end_pos = input('Podaj pozycję początkową oraz końcową: ').upper().split()
+            start_pos, end_pos = get_ship_pos(ship_size)
             vertical_or_horizontal = check_ship_level(start_pos, end_pos, ship_size)
             if vertical_or_horizontal:
                 print(start_pos, end_pos, vertical_or_horizontal)

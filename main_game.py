@@ -8,15 +8,15 @@ def generate_empty_map(size):
 
 
 def print_map(battlefield):
-    print(end=' ')
+    print(end='  ')
     for number in range(len(battlefield)):
-        print(number  + 1, end=' ')
+        print(number  + 1, end='  ')
         if number + 1 == len(battlefield):
             print()
     for row in battlefield:
-        print(row, end='')
+        print(row, end=' ')
         for col in range(len(battlefield)):
-            print(battlefield[row][col], end=' ')
+            print(battlefield[row][col], end='  ')
         print()
 
 
@@ -32,32 +32,32 @@ def generate_ships():
 
 def check_ship_level(ship_start, ship_end, ship_len):
     alphabet = string.ascii_uppercase
-    ship_start_letter, ship_start_number = ship_start[0], ship_start[1:]
+    ship_start_letter, ship_start_number = ship_start[0], int(ship_start[1:]) -1
     ship_start_letter_index = alphabet.index(ship_start_letter)
-    ship_end_letter, ship_end_number = ship_end[0], ship_end[1:]
+    ship_end_letter, ship_end_number = ship_end[0], int(ship_end[1:]) - 1
     ship_end_letter_index = alphabet.index(ship_end_letter)
-    # Walidacja pionowa
+    # Sprawdzanie, czy statek jest ustawiony pionowo
     if ship_start_number == ship_end_number:
         if (ship_start_letter_index - ship_end_letter_index == ship_len - 1 or
                 ship_start_letter_index - ship_end_letter_index == -ship_len + 1):
             return 'vertical'
-    # Walidacja pozioma
+    # Sprawdzanie, czy statek jest ustawiony poziomo
     if ship_start_letter == ship_end_letter:
-        if (int(ship_start_number) - int(ship_end_number) == ship_len - 1 or
-                int(ship_start_number) - int(ship_end_number) == -ship_len + 1):
+        if (ship_start_number - ship_end_number == ship_len - 1 or
+                ship_start_number - ship_end_number == - ship_len + 1):
             return 'horizontal'
     return False
 
 
 def get_coords(ship_start, ship_end, level):
     alphabet = string.ascii_uppercase
-    ship_start_letter, ship_start_number = ship_start[0], ship_start[1:]
+    ship_start_letter, ship_start_number = ship_start[0], int(ship_start[1:]) - 1
     ship_start_letter_index = alphabet.index(ship_start_letter)
-    ship_end_letter, ship_end_number = ship_end[0], ship_end[1:]
+    ship_end_letter, ship_end_number = ship_end[0], int(ship_end[1:]) - 1
     ship_end_letter_index = alphabet.index(ship_end_letter)
     ship_coords = []
     if level == 'horizontal':
-        for coord in range(int(ship_start_number), int(ship_end_number) + 1):
+        for coord in range(ship_start_number, ship_end_number + 1):
             ship_coords.append(ship_start_letter + str(coord))
     else:
         for coord in range(ship_start_letter_index, ship_end_letter_index + 1):
@@ -83,28 +83,38 @@ def check_ship_location(ship_coords, battlefield, level):
                 if battlefield[previous_row][col] == 's' or battlefield[next_row][col] == 's':
                     return False
                 # Sprawdzanie góra-środek-dół na początku statku
-                if 1 < col < 10 and coord == ship_coords[0]:
+                if 0 < col < 9 and coord == ship_coords[0]:
                     if (battlefield[previous_row][col - 1] == 's'
                             or battlefield[row][col - 1] == 's'
                             or battlefield[next_row][col - 1] == 's'):
                         return False
                 # Sprawdzanie góra-środek-dół na końcu statku
-                if 1 < col < 10 and coord == ship_coords[-1]:
+                if 0 < col < 9 and coord == ship_coords[-1]:
                     if (battlefield[previous_row][col + 1] == 's'
                             or battlefield[row][col + 1] == 's'
                             or battlefield[next_row][col + 1] == 's'):
                         return False
-            # Sprawdzanie, gdy statek jest przy lewej krawędzi planszy
-            if row == 'A':
+            # Sprawdzanie, gdy statek jest przy górnej krawędzi planszy
+            if row == 'A' and col in (0, 9):
                 if battlefield[next_row][col] == 's':
                     return False
+            if row == 'A' and 0 < col < 9:
+                if (battlefield[row][col] == 's'
+                        or battlefield[next_row][col] == 's'):
+                    return False
             # Sprawdzanie, gdy statek jest przy prawej krawędzi planszy
-            if row == 'J':
+            if row == 'J' and col in (0, 9):
                 if battlefield[previous_row][col] == 's':
                     return False
+            if row == 'J' and 0 < col < 9:
+                if (battlefield[previous_row][col] == 's'
+                        or battlefield[previous_row][col] == 's'):
+                    return False
+            # TODO: Dodać sprawdzanie statku w rogu, i w przypadku gdy jest przy krawędzi
+            #       pion i poziom, bmka poniedziałek o 8
         else:
             # Sprawdzanie prawo-lewo w pionie
-            if 1 < col < 10:
+            if 0 < col < 9:
                 if battlefield[row][col - 1] == 's' or battlefield[row][col + 1] == 's':
                     return False
                 # Sprawdzania góra-środek-dół na początku statku
@@ -120,11 +130,11 @@ def check_ship_location(ship_coords, battlefield, level):
                             or battlefield[next_row][col + 1] == 's'):
                         return False
             # Sprawdzanie, gdy statek jest przy górnej krawędzi planszy
-            if col == 1:
+            if col == 0:
                 if battlefield[row][col + 1] == 's':
                     return False
             # Sprawdzanie, gdy statek jest przy dolnej krawędzi planszy
-            if col == 10:
+            if col == 9:
                 if battlefield[row][col - 1] == 's':
                     return False
     return True

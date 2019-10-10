@@ -76,6 +76,7 @@ def check_ship_location(ship_coords, battlefield, level):
     for coord in ship_coords:
         previous_row = alphabet[alphabet.index(row) - 1]
         next_row = alphabet[alphabet.index(row) + 1]
+        # Sprawdzanie w poziomie
         if level == 'horizontal':
             # Sprawdzanie góra-dół w poziomie
             if 'A' < row < 'J':
@@ -89,8 +90,8 @@ def check_ship_location(ship_coords, battlefield, level):
                         return False
                 # Sprawdzanie góra-środek-dół na końcu statku
                 if 1 < col < 10 and coord == ship_coords[-1]:
-                    if (battlefield[previous_row][col + 1 == 's']
-                            or battlefield[row][col + 1 == 's']
+                    if (battlefield[previous_row][col + 1] == 's'
+                            or battlefield[row][col + 1] == 's'
                             or battlefield[next_row][col + 1] == 's'):
                         return False
             # Sprawdzanie, gdy statek jest przy lewej krawędzi planszy

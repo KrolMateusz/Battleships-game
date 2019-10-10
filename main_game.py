@@ -24,8 +24,8 @@ def generate_ships():
     ships = {
         5: 1,
         4: 1,
-        3: 3,
-        2: 2,
+        3: 2,
+        2: 1,
     }
     return ships
 

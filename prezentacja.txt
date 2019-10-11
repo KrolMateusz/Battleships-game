@@ -3,7 +3,3 @@ x - trafiony
 # - zatopiony
 . - pole, w które można oddać strzał
 s - statek
-
-Listy zagnieżdżone, czy słownik o kluczach (a, b, c, d...) z odpowiadającą listą
-
-Nie mogą się stykać, nie mogą być pod skosem, muszą być wszystkie

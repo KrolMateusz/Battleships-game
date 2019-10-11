@@ -90,7 +90,8 @@ def check_ship_location(ship_coords, player_battlefield, level):
         if level == 'horizontal':
             # Sprawdzanie góra-dół w poziomie
             if 'A' < row < 'J':
-                if player_battlefield[previous_row][col] == 's' or player_battlefield[next_row][col] == 's':
+                if (player_battlefield[previous_row][col] == 's'
+                        or player_battlefield[next_row][col] == 's'):
                     return False
                 # Sprawdzanie góra-środek-dół na początku statku
                 if 0 < col < 9 and coord == ship_coords[0]:
@@ -182,6 +183,7 @@ def put_ship_on_map(ship_coords, player_battlefield):
 
 
 def place_ships(ships_to_place, player_battlefield):
+    ship_list = {}
     while ships_to_place:
         ship_size = list(ships_to_place.keys())[0]
         ships_placed = 0
@@ -194,10 +196,14 @@ def place_ships(ships_to_place, player_battlefield):
                 print(check_ship_location(coords, player_battlefield, vertical_or_horizontal))
                 if check_ship_location(coords, player_battlefield, vertical_or_horizontal):
                     player_battlefield = put_ship_on_map(coords, player_battlefield)
+                    ship_list[tuple(coords)] = []
+                    for _ in range(ship_size):
+                        ship_list[tuple(coords)].append('.')
+                    print(ship_list)
                     ships_placed += 1
                 print_map(player_battlefield)
         ships_to_place.pop(ship_size)
-    return player_battlefield
+    return player_battlefield, ship_list
 
 
 def shoot():
@@ -212,18 +218,26 @@ def check_shot(shot, player_battlefield):
     return False
 
 
-def is_sunk(player_battlefield):
-    return False
+def is_sunk(player_ships):
+    print('Początek: ', player_ships)
+    for ship, ship_fragments in player_ships.items():
+        if all([shot == 'x' for shot in ship_fragments]):
+            player_ships[ship] = ['#' for _ in ship_fragments]
+    print('Koniec: ', player_ships)
 
 
-def update_map(shot, player_battlefield, ocean_battlefield):
+def update_map(shot, player_battlefield, player_ships, ocean_battlefield):
     hit = check_shot(shot, player_battlefield)
     shot_letter, shot_number = shot[0], int(shot[1:]) - 1
+    shot = shot_letter + str(shot_number)
     if player_battlefield[shot_letter][shot_number] == '#':
         return None
     if hit:
         ocean_battlefield[shot_letter][shot_number] = 'x'
         player_battlefield[shot_letter][shot_number] = 'x'
+        for ship, ship_fragments in player_ships.items():
+            if shot in ship:
+                ship_fragments[ship.index(shot)] = 'x'
     else:
         ocean_battlefield[shot_letter][shot_number] = 'o'
         player_battlefield[shot_letter][shot_number] = 'o'
@@ -232,8 +246,13 @@ if __name__ == "__main__":
     ship_board = generate_empty_map(10)
     shot_board = generate_empty_map(10)
     print_map(ship_board)
-    print_map(place_ships(generate_ships(), ship_board))
-    shot = shoot()
-    update_map(shot, ship_board, shot_board)
+    ship_board, ships = place_ships(generate_ships(), ship_board)
+    shot_coord = shoot()
+    update_map(shot_coord, ship_board, ships, shot_board)
     print_map(ship_board)
     print_map(shot_board)
+    shot_coord = shoot()
+    update_map(shot_coord, ship_board, ships, shot_board)
+    print_map(ship_board)
+    print_map(shot_board)
+    is_sunk(ships)

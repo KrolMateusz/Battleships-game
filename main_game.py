@@ -202,19 +202,25 @@ def place_ships(ships_to_place, player_battlefield):
 
 def shoot():
     coord = input('Podaj miejsce, w które chcesz oddać strzał: ')
-    return coord
+    return coord.upper()
 
 
 def check_shot(shot, player_battlefield):
-    shot_letter, shot_number = shot[0], int(shot[1:])
+    shot_letter, shot_number = shot[0], int(shot[1:]) - 1
     if player_battlefield[shot_letter][shot_number] == 's':
         return True
     return False
 
 
+def is_sunk(player_battlefield):
+    return False
+
+
 def update_map(shot, player_battlefield, ocean_battlefield):
     hit = check_shot(shot, player_battlefield)
-    shot_letter, shot_number = shot[0], int(shot[1:])
+    shot_letter, shot_number = shot[0], int(shot[1:]) - 1
+    if player_battlefield[shot_letter][shot_number] == '#':
+        return None
     if hit:
         ocean_battlefield[shot_letter][shot_number] = 'x'
         player_battlefield[shot_letter][shot_number] = 'x'
@@ -224,5 +230,10 @@ def update_map(shot, player_battlefield, ocean_battlefield):
 
 if __name__ == "__main__":
     ship_board = generate_empty_map(10)
+    shot_board = generate_empty_map(10)
     print_map(ship_board)
     print_map(place_ships(generate_ships(), ship_board))
+    shot = shoot()
+    update_map(shot, ship_board, shot_board)
+    print_map(ship_board)
+    print_map(shot_board)

@@ -21,13 +21,13 @@ def print_map(player_battlefield):
 
 
 def generate_ships():
-    ships = {
+    player_ships = {
         5: 1,
         4: 1,
         3: 2,
         2: 1,
     }
-    return ships
+    return player_ships
 
 def get_ship_pos(ship_len):
     print('Podaj pozycję statku o rozmiarze ', ship_len)

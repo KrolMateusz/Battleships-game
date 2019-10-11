@@ -191,15 +191,12 @@ def place_ships(ships_to_place, player_battlefield):
             start_pos, end_pos = get_ship_pos(ship_size)
             vertical_or_horizontal = check_ship_level(start_pos, end_pos, ship_size)
             if vertical_or_horizontal:
-                print(start_pos, end_pos, vertical_or_horizontal)
                 coords = get_coords(start_pos, end_pos, vertical_or_horizontal)
-                print(check_ship_location(coords, player_battlefield, vertical_or_horizontal))
                 if check_ship_location(coords, player_battlefield, vertical_or_horizontal):
                     player_battlefield = put_ship_on_map(coords, player_battlefield)
                     ship_list[tuple(coords)] = []
                     for _ in range(ship_size):
                         ship_list[tuple(coords)].append('.')
-                    print(ship_list)
                     ships_placed += 1
                 print_map(player_battlefield)
         ships_to_place.pop(ship_size)
@@ -219,11 +216,9 @@ def check_shot(shot, player_battlefield):
 
 
 def is_sunk(player_ships):
-    print('Początek: ', player_ships)
     for ship, ship_fragments in player_ships.items():
         if all([shot == 'x' for shot in ship_fragments]):
             player_ships[ship] = ['#' for _ in ship_fragments]
-    print('Koniec: ', player_ships)
 
 
 def update_map(shot, player_battlefield, player_ships, ocean_battlefield):
@@ -242,17 +237,49 @@ def update_map(shot, player_battlefield, player_ships, ocean_battlefield):
         ocean_battlefield[shot_letter][shot_number] = 'o'
         player_battlefield[shot_letter][shot_number] = 'o'
 
+
+def end_game(player_ships):
+    ships_sunk = []
+    for _, ship_fragments in player_ships.items():
+        if all([shot == '#' for shot in ship_fragments]):
+            ships_sunk.append(True)
+        else:
+            ships_sunk.append(False)
+    if all(ships_sunk):
+        return True
+    return False
+
+
+def main():
+    ship_board_1 = generate_empty_map(10)
+    shot_board_1 = generate_empty_map(10)
+    ship_board_2 = generate_empty_map(10)
+    shot_board_2 = generate_empty_map(10)
+    # Gracz 1 ustawia statki
+    print('Gracz 1 wykonuje ruch')
+    print_map(ship_board_1)
+    ship_board_1, ships_1 = place_ships(generate_ships(), ship_board_1)
+    # Gracz 2 ustawia statki
+    print('Gracz 2 wykonuje ruch')
+    print_map(ship_board_2)
+    ship_board_2, ships_2 = place_ships(generate_ships(), ship_board_2)
+    # Gra się toczy, dopóki wszystki statki jednego z graczy nie zostaną zatopione
+    while True:
+        # Gracz 1 oddaje strzał
+        shot_coord_1 = shoot()
+        update_map(shot_coord_1, ship_board_2, ships_2, shot_board_1)
+        print_map(shot_board_1)
+        if end_game(ships_2):
+            print('Gracz 1 wygrywa!')
+            break
+        # Gracz drugi oddaje strzał
+        shot_coord_2 = shoot()
+        update_map(shot_coord_2, ship_board_1, ships_1, shot_board_2)
+        print_map(shot_board_2)
+        if end_game(ships_1):
+            print('Gracz 2 wygrywa!')
+            break
+
+
 if __name__ == "__main__":
-    ship_board = generate_empty_map(10)
-    shot_board = generate_empty_map(10)
-    print_map(ship_board)
-    ship_board, ships = place_ships(generate_ships(), ship_board)
-    shot_coord = shoot()
-    update_map(shot_coord, ship_board, ships, shot_board)
-    print_map(ship_board)
-    print_map(shot_board)
-    shot_coord = shoot()
-    update_map(shot_coord, ship_board, ships, shot_board)
-    print_map(ship_board)
-    print_map(shot_board)
-    is_sunk(ships)
+    main()

@@ -274,6 +274,7 @@ def main():
         # Gracz 1 oddaje strzał
         shot_coord_1 = shoot()
         update_map(shot_coord_1, ship_board_2, ships_2, shot_board_1)
+        print_map(ship_board_1)
         print_map(shot_board_1)
         if end_game(ships_2):
             print('Gracz 1 wygrywa!')
@@ -281,6 +282,7 @@ def main():
         # Gracz drugi oddaje strzał
         shot_coord_2 = shoot()
         update_map(shot_coord_2, ship_board_1, ships_1, shot_board_2)
+        print_map(ship_board_2)
         print_map(shot_board_2)
         if end_game(ships_1):
             print('Gracz 2 wygrywa!')

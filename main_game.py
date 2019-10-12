@@ -215,27 +215,33 @@ def check_shot(shot, player_battlefield):
     return False
 
 
-def is_sunk(player_ships):
+def update_player_sunk_ships(player_ships):
     for ship, ship_fragments in player_ships.items():
         if all([shot == 'x' for shot in ship_fragments]):
             player_ships[ship] = ['#' for _ in ship_fragments]
 
 
-def update_map(shot, player_battlefield, player_ships, ocean_battlefield):
-    hit = check_shot(shot, player_battlefield)
+def update_map(shot, oponent_battlefield, oponent_ships, player_ocean_battlefield):
+    hit = check_shot(shot, oponent_battlefield)
     shot_letter, shot_number = shot[0], int(shot[1:]) - 1
     shot = shot_letter + str(shot_number)
-    if player_battlefield[shot_letter][shot_number] == '#':
+    if oponent_battlefield[shot_letter][shot_number] == '#':
         return None
     if hit:
-        ocean_battlefield[shot_letter][shot_number] = 'x'
-        player_battlefield[shot_letter][shot_number] = 'x'
-        for ship, ship_fragments in player_ships.items():
+        player_ocean_battlefield[shot_letter][shot_number] = 'x'
+        oponent_battlefield[shot_letter][shot_number] = 'x'
+        for ship, ship_fragments in oponent_ships.items():
             if shot in ship:
                 ship_fragments[ship.index(shot)] = 'x'
     else:
-        ocean_battlefield[shot_letter][shot_number] = 'o'
-        player_battlefield[shot_letter][shot_number] = 'o'
+        player_ocean_battlefield[shot_letter][shot_number] = 'o'
+        oponent_battlefield[shot_letter][shot_number] = 'o'
+    update_player_sunk_ships(oponent_ships)
+    for ship, ship_fragments in oponent_ships.items():
+        if all([shot == '#' for shot in ship_fragments]):
+            for row, col in ship:
+                player_ocean_battlefield[row][int(col)] = '#'
+                oponent_battlefield[row][int(col)] = '#'
 
 
 def end_game(player_ships):

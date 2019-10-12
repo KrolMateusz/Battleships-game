@@ -1,5 +1,6 @@
 import string
 
+
 def generate_empty_map(size):
     battlefield = {}
     for letter in 'ABCDEFGHIJ':
@@ -28,6 +29,7 @@ def generate_ships():
         2: 1,
     }
     return player_ships
+
 
 def get_ship_pos(ship_len):
     print('Podaj pozycję statku o rozmiarze ', ship_len)
@@ -290,4 +292,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    print_map(generate_empty_map(10))
+    # main()

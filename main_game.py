@@ -274,6 +274,7 @@ def main():
     # Gra się toczy, dopóki wszystki statki jednego z graczy nie zostaną zatopione
     while True:
         # Gracz 1 oddaje strzał
+        print('Gracz 1 wykonuje ruch')
         shot_coord_1 = shoot()
         update_map(shot_coord_1, ship_board_2, ships_2, shot_board_1)
         print_map(ship_board_1)
@@ -282,6 +283,7 @@ def main():
             print('Gracz 1 wygrywa!')
             break
         # Gracz drugi oddaje strzał
+        print('Gracz 2 wykonuje ruch')
         shot_coord_2 = shoot()
         update_map(shot_coord_2, ship_board_1, ships_1, shot_board_2)
         print_map(ship_board_2)
@@ -292,5 +294,5 @@ def main():
 
 
 if __name__ == "__main__":
-    print_map(generate_empty_map(10))
-    # main()
+    # print_map(generate_empty_map(10))
+    main()

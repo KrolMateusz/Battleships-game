@@ -1,0 +1,348 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"opo",
+				"oponent_grid\tparam"
+			],
+			[
+				"opon",
+				"oponent_ships\tparam"
+			],
+			[
+				"oponent_",
+				"oponent_ships"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"end",
+				"end_game\tfunction"
+			],
+			[
+				"play",
+				"player_1\tstatement"
+			],
+			[
+				"pla",
+				"player_2\tstatement"
+			],
+			[
+				"playe",
+				"player_2\tstatement"
+			],
+			[
+				"print",
+				"print_map"
+			],
+			[
+				"player",
+				"player_2"
+			],
+			[
+				"pri",
+				"print\tfunction"
+			],
+			[
+				"pr",
+				"print_map\tfunction"
+			],
+			[
+				"shot",
+				"shot_grid\tstatement"
+			],
+			[
+				"ships",
+				"ships_to_place\tstatement"
+			],
+			[
+				"ship_",
+				"ship_coords"
+			],
+			[
+				"def",
+				"defs\tMethod"
+			],
+			[
+				"ge",
+				"generate_empty_map"
+			],
+			[
+				"cla",
+				"class\tNew Class"
+			],
+			[
+				"clas",
+				"class\tkeyword"
+			],
+			[
+				"prin",
+				"print_map"
+			],
+			[
+				"de",
+				"dolnej"
+			]
+		]
+	},
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Anaconda Python Builder",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"sublime",
+				"SublimeREPL: Clojure"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"upgra",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+			"dir",
+			"cd ",
+			"subl --help",
+			"python main_game.py",
+			"python",
+			"echo elo",
+			"import encodings.idna",
+			"for i in range(10):",
+			"2 + 3",
+			"q",
+			"close",
+			"echo siema",
+			"close",
+			"quit",
+			"python"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/User/Python battleships venv.sublime-build",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/.gitignore",
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/User/Python 3.8 battleships venv.sublime-build",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/virtualenvironment/Scripts/deactivate.bat",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/virtualenvironment/Scripts/Activate.ps1",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/virtualenvironment/Scripts/activate.bat",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/virtualenvironment/Scripts/activate",
+		"/C/Users/Mateusz/wwsis_projects/battleships-game/virtualenvironment/pyvenv.cfg",
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/User/Battleships-env-Python 3.8.sublime-build",
+		"/C/Users/Mateusz/wwsis_projects/battleships/main_game.py",
+		"/C/Users/Mateusz/wwsis_projects/battleships/prezentacja.txt",
+		"/C/Users/Mateusz/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
+	],
+	"find":
+	{
+		"height": 70.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"update_player_sunk_ships",
+			"oponent_ships",
+			"player_ocean_battlefield",
+			"shot",
+			"oponent_ships",
+			"oponent_battlefield",
+			"pep8",
+			"player_battlefield",
+			"ships_to_place",
+			"player_battlefield",
+			"battlefield",
+			"ship_board = generate_empty_map(10)"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 126.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Anaconda Python Builder",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 202.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

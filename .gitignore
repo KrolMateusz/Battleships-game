@@ -126,3 +126,6 @@ dmypy.json
 
 #Virtual Studio Code settings
 .vscode
+
+#Sublime Text 3
+*.sublime-project

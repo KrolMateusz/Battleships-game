@@ -43,7 +43,7 @@ def get_ship_pos(ship_len):
 
 def check_ship_level(ship_start, ship_end, ship_len):
     alphabet = string.ascii_uppercase
-    ship_start_letter, ship_start_number = ship_start[0], int(ship_start[1:]) -1
+    ship_start_letter, ship_start_number = ship_start[0], int(ship_start[1:]) - 1
     ship_start_letter_index = alphabet.index(ship_start_letter)
     ship_end_letter, ship_end_number = ship_end[0], int(ship_end[1:]) - 1
     ship_end_letter_index = alphabet.index(ship_end_letter)
@@ -217,6 +217,7 @@ def check_shot(shot, player_battlefield):
     return False
 
 
+@staticmethod
 def update_player_sunk_ships(player_ships):
     for ship, ship_fragments in player_ships.items():
         if all([fragment == 'x' for fragment in ship_fragments]):
@@ -294,5 +295,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # print_map(generate_empty_map(10))
     main()

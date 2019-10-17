@@ -11,7 +11,7 @@ def generate_empty_map(size):
 def print_map(player_battlefield):
     print(end='  ')
     for number in range(len(player_battlefield)):
-        print(number  + 1, end='  ')
+        print(number + 1, end='  ')
         if number + 1 == len(player_battlefield):
             print()
     for row in player_battlefield:
@@ -92,41 +92,41 @@ def check_ship_location(ship_coords, player_battlefield, level):
         if level == 'horizontal':
             # Sprawdzanie góra-dół w poziomie
             if 'A' < row < 'J':
-                if (player_battlefield[previous_row][col] == 's'
-                        or player_battlefield[next_row][col] == 's'):
+                if (player_battlefield[previous_row][col] == 's' or
+                        player_battlefield[next_row][col] == 's'):
                     return False
                 # Sprawdzanie góra-środek-dół na początku statku
                 if 0 < col < 9 and coord == ship_coords[0]:
-                    if (player_battlefield[previous_row][col - 1] == 's'
-                            or player_battlefield[row][col - 1] == 's'
-                            or player_battlefield[next_row][col - 1] == 's'):
+                    if (player_battlefield[previous_row][col - 1] == 's' or
+                            player_battlefield[row][col - 1] == 's' or
+                            player_battlefield[next_row][col - 1] == 's'):
                         return False
                 # Sprawdzanie góra-środek-dół na końcu statku
                 if 0 < col < 9 and coord == ship_coords[-1]:
-                    if (player_battlefield[previous_row][col + 1] == 's'
-                            or player_battlefield[row][col + 1] == 's'
-                            or player_battlefield[next_row][col + 1] == 's'):
+                    if (player_battlefield[previous_row][col + 1] == 's' or
+                            player_battlefield[row][col + 1] == 's' or
+                            player_battlefield[next_row][col + 1] == 's'):
                         return False
             # Sprawdzanie, gdy statek jest przy górnej krawędzi planszy
             if row == 'A' and col != 0 and coord == ship_coords[0]:
-                if (player_battlefield[row][col - 1] == 's'
-                        or player_battlefield[next_row][col - 1] == 's'):
+                if (player_battlefield[row][col - 1] == 's' or
+                        player_battlefield[next_row][col - 1] == 's'):
                     return False
             if row == 'A' and col != 9 and coord == ship_coords[-1]:
-                if (player_battlefield[row][col + 1] == 's'
-                        or player_battlefield[next_row][col + 1] == 's'):
+                if (player_battlefield[row][col + 1] == 's' or
+                        player_battlefield[next_row][col + 1] == 's'):
                     return False
             if row == 'A':
                 if player_battlefield[next_row][col] == 's':
                     return False
             # Sprawdzanie, gdy statek jest przy dolnej krawędzi planszy
             if row == 'J' and col != 0 and coord == ship_coords[0]:
-                if (player_battlefield[row][col - 1] == 's'
-                        or player_battlefield[previous_row][col - 1] == 's'):
+                if (player_battlefield[row][col - 1] == 's' or
+                        player_battlefield[previous_row][col - 1] == 's'):
                     return False
             if row == 'J' and col != 9 and coord == ship_coords[-1]:
-                if (player_battlefield[row][col + 1] == 's'
-                        or player_battlefield[previous_row][col + 1] == 's'):
+                if (player_battlefield[row][col + 1] == 's' or
+                        player_battlefield[previous_row][col + 1] == 's'):
                     return False
             if row == 'J':
                 if player_battlefield[previous_row][col] == 's':
@@ -135,41 +135,41 @@ def check_ship_location(ship_coords, player_battlefield, level):
         else:
             # Sprawdzanie prawo-lewo w pionie
             if 0 < col < 9:
-                if (player_battlefield[row][col - 1] == 's'
-                        or player_battlefield[row][col + 1] == 's'):
+                if (player_battlefield[row][col - 1] == 's' or
+                        player_battlefield[row][col + 1] == 's'):
                     return False
                 # Sprawdzania góra-środek-dół na początku statku
                 if 'A' < row < 'J' and coord == ship_coords[0]:
-                    if (player_battlefield[previous_row][col - 1] == 's'
-                            or player_battlefield[previous_row][col] == 's'
-                            or player_battlefield[previous_row][col + 1] == 's'):
+                    if (player_battlefield[previous_row][col - 1] == 's' or
+                            player_battlefield[previous_row][col] == 's' or
+                            player_battlefield[previous_row][col + 1] == 's'):
                         return False
                 # Sprawdzania góra-środek-dół na końcu statku
                 elif 'A' < row < 'J' and coord == ship_coords[-1]:
-                    if (player_battlefield[next_row][col - 1] == 's'
-                            or player_battlefield[next_row][col] == 's'
-                            or player_battlefield[next_row][col + 1] == 's'):
+                    if (player_battlefield[next_row][col - 1] == 's' or
+                            player_battlefield[next_row][col] == 's' or
+                            player_battlefield[next_row][col + 1] == 's'):
                         return False
             # Sprawdzanie, gdy statek jest przy lewej krawędzi planszy
             if col == 0 and row != 'A' and coord == ship_coords[0]:
-                if (player_battlefield[previous_row][col + 1] == 's'
-                        or player_battlefield[previous_row][col] == 's'):
+                if (player_battlefield[previous_row][col + 1] == 's' or
+                        player_battlefield[previous_row][col] == 's'):
                     return False
             if col == 0 and row != 'J' and coord == ship_coords[-1]:
-                if (player_battlefield[next_row][col + 1] == 's'
-                        or player_battlefield[next_row][col] == 's'):
+                if (player_battlefield[next_row][col + 1] == 's' or
+                        player_battlefield[next_row][col] == 's'):
                     return False
             if col == 0:
                 if player_battlefield[row][col + 1] == 's':
                     return False
             # Sprawdzanie, gdy statek jest przy prawej krawędzi planszy
             if col == 9 and row != 'A' and coord == ship_coords[0]:
-                if (player_battlefield[previous_row][col] == 's'
-                        or player_battlefield[previous_row][col - 1] == 's'):
+                if (player_battlefield[previous_row][col] == 's' or
+                        player_battlefield[previous_row][col - 1] == 's'):
                     return False
             if col == 9 and row != 'J' and coord == ship_coords[-1]:
-                if (player_battlefield[next_row][col] == 's'
-                        or player_battlefield[next_row][col - 1] == 's'):
+                if (player_battlefield[next_row][col] == 's' or
+                        player_battlefield[next_row][col - 1] == 's'):
                     return False
             if col == 9:
                 if player_battlefield[row][col - 1] == 's':

@@ -217,7 +217,6 @@ def check_shot(shot, player_battlefield):
     return False
 
 
-@staticmethod
 def update_player_sunk_ships(player_ships):
     for ship, ship_fragments in player_ships.items():
         if all([fragment == 'x' for fragment in ship_fragments]):

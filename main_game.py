@@ -4,7 +4,7 @@ import string
 def generate_empty_map(size):
     battlefield = {}
     for letter in 'ABCDEFGHIJ':
-        battlefield.setdefault(letter, ["." for _ in range(size)])
+        battlefield[letter] = ["." for _ in range(size)]
     return battlefield
 
 
@@ -219,7 +219,7 @@ def check_shot(shot, player_battlefield):
 
 def update_player_sunk_ships(player_ships):
     for ship, ship_fragments in player_ships.items():
-        if all([shot == 'x' for shot in ship_fragments]):
+        if all([fragment == 'x' for fragment in ship_fragments]):
             player_ships[ship] = ['#' for _ in ship_fragments]
 
 

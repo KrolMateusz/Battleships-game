@@ -195,7 +195,7 @@ class Player:
                 if vertical_or_horizontal:
                     coords = self.get_coords(start_pos, end_pos, vertical_or_horizontal)
                     if self.check_ship_location(coords, vertical_or_horizontal):
-                        self.ship_board = self.put_ship_on_map(coords)
+                        self.put_ship_on_map(coords)
                         self.ship_list[tuple(coords)] = []
                         for _ in range(ship_size):
                             self.ship_list[tuple(coords)].append('.')

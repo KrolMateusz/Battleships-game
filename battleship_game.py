@@ -256,6 +256,7 @@ class Player:
         self.shot_grid = self.generate_empty_map(10)
         self.ships_to_place = self.generate_ships()
         self.ship_list = {}
+        self.shot = ''
 
 
 def main():

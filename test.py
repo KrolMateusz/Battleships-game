@@ -6,28 +6,45 @@ from battleship_game import Player
 
 class Ai(Player):
 
-    def generate_random_coords(self):
+    def generate_random_coords(self, vertical_or_horizontal):
+        ship_size = list(self.ships_to_place.keys())[0]
+        if vertical_or_horizontal == 'horizontal':
+            row = random.choice(string.ascii_uppercase[:10])
+            ship_start_number = random.randint(0, 11 - ship_size)
+            ship_end_number = ship_start_number + ship_size - 1
+            print(row, ship_start_number, ship_end_number)
+            start_pos = row + str(ship_start_number)
+            end_pos = row + str(ship_end_number)
+            return start_pos, end_pos
+        else:
+            col = random.randint(0, 10)
+            ship_start_letter = random.choice(string.ascii_uppercase[:11 - ship_size])
+            ship_start_letter_index = string.ascii_uppercase.index(ship_start_letter)
+            ship_end_letter = string.ascii_uppercase[ship_start_letter_index + ship_size - 1]
+            print(col, ship_start_letter, ship_end_letter)
+            start_pos = ship_start_letter + str(col)
+            end_pos = ship_end_letter + str(col)
+            return start_pos, end_pos
+
+    def place_ships(self):
         while self.ships_to_place:
             ship_size = list(self.ships_to_place.keys())[0]
             ships_placed = 0
             while ships_placed < self.ships_to_place[ship_size]:
-                horizontal_or_vertical = random.choice(['horizontal', 'vertical'])
-                if horizontal_or_vertical == 'horizontal':
-                    row = random.choice(string.ascii_uppercase[:10])
-                    ship_start_number = random.randint(0, 11 - ship_size)
-                    ship_end_number = ship_start_number + ship_size - 1
-                    print(row, ship_start_number, ship_end_number)
-                else:
-                    col = random.randint(0, 10)
-                    ship_start_letter = random.choice(string.ascii_uppercase[:11 - ship_size])
-                    ship_start_letter_index = string.ascii_uppercase.index(ship_start_letter)
-                    ship_end_letter = string.ascii_uppercase[ship_start_letter_index + ship_size - 1]
-                    print(col, ship_start_letter, ship_end_letter)
-                ships_placed += 1
+                vertical_or_horizontal = random.choice(['horizontal', 'vertical'])
+                start_pos, end_pos = self.generate_random_coords(vertical_or_horizontal)
+                coords = self.get_coords(start_pos, end_pos, vertical_or_horizontal)
+                if self.check_ship_location(coords, vertical_or_horizontal):
+                    self.put_ship_on_map(coords)
+                    self.ship_list[tuple(coords)] = []
+                    for _ in range(ship_size):
+                        self.ship_list[tuple(coords)].append('.')
+                    ships_placed += 1
             self.ships_to_place.pop(ship_size)
+        self.print_map(self.ship_grid)
 
 
 if __name__ == "__main__":
     print('Touchpad nie działa')
-    Ai().generate_random_coords()
     print(Ai().ships_to_place)
+    Ai().place_ships()

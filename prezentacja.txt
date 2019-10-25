@@ -3,3 +3,5 @@ x - trafiony
 # - zatopiony
 . - pole, w które można oddać strzał
 s - statek
+
+cooords może być atrybutem w klasie (Refaktoryzacja kodu)

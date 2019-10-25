@@ -11,21 +11,18 @@ class Ai(Player):
         ship_size = list(self.ships_to_place.keys())[0]
         if vertical_or_horizontal == 'horizontal':
             row = random.choice(string.ascii_uppercase[:10])
-            ship_start_number = random.randint(0, 11 - ship_size)
+            ship_start_number = random.randint(1, 11 - ship_size)
             ship_end_number = ship_start_number + ship_size - 1
-            print(row, ship_start_number, ship_end_number)
             start_pos = row + str(ship_start_number)
             end_pos = row + str(ship_end_number)
-            return start_pos, end_pos
         else:
             col = random.randint(0, 10)
             ship_start_letter = random.choice(string.ascii_uppercase[:11 - ship_size])
             ship_start_letter_index = string.ascii_uppercase.index(ship_start_letter)
             ship_end_letter = string.ascii_uppercase[ship_start_letter_index + ship_size - 1]
-            print(col, ship_start_letter, ship_end_letter)
             start_pos = ship_start_letter + str(col)
             end_pos = ship_end_letter + str(col)
-            return start_pos, end_pos
+        return start_pos, end_pos
 
     def place_ships(self):
         while self.ships_to_place:
@@ -42,7 +39,6 @@ class Ai(Player):
                         self.ship_list[tuple(coords)].append('.')
                     ships_placed += 1
             self.ships_to_place.pop(ship_size)
-        self.print_map(self.ship_grid)
 
     def shoot(self):
         if self.coords_to_shoot:
@@ -66,23 +62,30 @@ def main():
     while True:
         # Gracz 1 oddaje strzał
         player_1.shoot()
-        print(player_1.shot)
         player_1.update_map(player_2.ship_grid, player_2.ship_list)
-        if player_2.end_game():
+        if player_2.end_game() or not player_1.coords_to_shoot:
             print('Gracz 1 wygrywa!')
+            player_1.update_map(player_2.ship_grid, player_2.ship_list)
             player_2.print_map(player_2.ship_grid)
+            print(player_2.ship_list)
             break
         # Gracz drugi oddaje strzał
         player_2.shoot()
-        print(player_2.shot)
         player_2.update_map(player_1.ship_grid, player_1.ship_list)
-        if player_1.end_game():
+        if player_1.end_game() or not player_2.coords_to_shoot:
             print('Gracz 2 wygrywa!')
+            player_2.update_map(player_1.ship_grid, player_1.ship_list)
             player_1.print_map(player_1.ship_grid)
+            print(player_1.ship_list)
             break
+
+
+def play_games(number_of_games):
+    for _ in range(number_of_games):
+        main()
 
 
 if __name__ == "__main__":
     start = time.time()
-    main()
+    play_games(1000)
     print(f'Czas wykonywania programu to {time.time() - start} s')

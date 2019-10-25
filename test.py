@@ -52,7 +52,7 @@ class Ai(Player):
 
     def __init__(self):
         super().__init__()
-        self.coords_to_shoot = [coord for coord in itertools.product(string.ascii_uppercase[:10], range(1, 11))]
+        self.coords_to_shoot = list(itertools.product(string.ascii_uppercase[:10], range(1, 11)))
 
 
 def main():

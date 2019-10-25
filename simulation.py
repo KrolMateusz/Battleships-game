@@ -1,4 +1,3 @@
-import battleship_game
 import random
 import string
 import itertools
@@ -67,6 +66,7 @@ def main():
     while True:
         # Gracz 1 oddaje strzał
         player_1.shoot()
+        print(player_1.shot)
         player_1.update_map(player_2.ship_grid, player_2.ship_list)
         if player_2.end_game():
             print('Gracz 1 wygrywa!')
@@ -74,6 +74,7 @@ def main():
             break
         # Gracz drugi oddaje strzał
         player_2.shoot()
+        print(player_2.shot)
         player_2.update_map(player_1.ship_grid, player_1.ship_list)
         if player_1.end_game():
             print('Gracz 2 wygrywa!')

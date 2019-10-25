@@ -2,6 +2,7 @@ import battleship_game
 import random
 import string
 import itertools
+import time
 from battleship_game import Player
 
 
@@ -59,34 +60,28 @@ def main():
     player_1 = Ai()
     player_2 = Ai()
     # Gracz 1 ustawia statki
-    print('Gracz 1 wykonuje ruch')
-    player_1.print_map(player_1.ship_grid)
     player_1.place_ships()
     # Gracz 2 ustawia statki
-    print('Gracz 2 wykonuje ruch')
-    player_2.print_map(player_2.ship_grid)
     player_2.place_ships()
     # Gra się toczy, dopóki wszystki statki jednego z graczy nie zostaną zatopione
     while True:
         # Gracz 1 oddaje strzał
-        print('Gracz 1 wykonuje ruch')
         player_1.shoot()
         player_1.update_map(player_2.ship_grid, player_2.ship_list)
-        player_1.print_map(player_1.ship_grid)
-        player_1.print_map(player_1.shot_grid)
         if player_2.end_game():
             print('Gracz 1 wygrywa!')
+            player_2.print_map(player_2.ship_grid)
             break
         # Gracz drugi oddaje strzał
-        print('Gracz 2 wykonuje ruch')
         player_2.shoot()
         player_2.update_map(player_1.ship_grid, player_1.ship_list)
-        player_2.print_map(player_2.ship_grid)
-        player_2.print_map(player_2.shot_grid)
         if player_1.end_game():
             print('Gracz 2 wygrywa!')
+            player_1.print_map(player_1.ship_grid)
             break
 
 
 if __name__ == "__main__":
+    start = time.time()
     main()
+    print(f'Czas wykonywania programu to {time.time() - start} s')

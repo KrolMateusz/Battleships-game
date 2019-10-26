@@ -16,7 +16,7 @@ class Ai(Player):
             start_pos = row + str(ship_start_number)
             end_pos = row + str(ship_end_number)
         else:
-            col = random.randint(0, 10)
+            col = random.randint(1, 10)
             ship_start_letter = random.choice(string.ascii_uppercase[:11 - ship_size])
             ship_start_letter_index = string.ascii_uppercase.index(ship_start_letter)
             ship_end_letter = string.ascii_uppercase[ship_start_letter_index + ship_size - 1]
@@ -63,20 +63,14 @@ def main():
         # Gracz 1 oddaje strzał
         player_1.shoot()
         player_1.update_map(player_2.ship_grid, player_2.ship_list)
-        if player_2.end_game() or not player_1.coords_to_shoot:
+        if player_2.end_game():
             print('Gracz 1 wygrywa!')
-            player_1.update_map(player_2.ship_grid, player_2.ship_list)
-            player_2.print_map(player_2.ship_grid)
-            print(player_2.ship_list)
             break
         # Gracz drugi oddaje strzał
         player_2.shoot()
         player_2.update_map(player_1.ship_grid, player_1.ship_list)
-        if player_1.end_game() or not player_2.coords_to_shoot:
+        if player_1.end_game():
             print('Gracz 2 wygrywa!')
-            player_2.update_map(player_1.ship_grid, player_1.ship_list)
-            player_1.print_map(player_1.ship_grid)
-            print(player_1.ship_list)
             break
 
 
@@ -87,5 +81,5 @@ def play_games(number_of_games):
 
 if __name__ == "__main__":
     start = time.time()
-    play_games(1000)
+    play_games(10000)
     print(f'Czas wykonywania programu to {time.time() - start} s')

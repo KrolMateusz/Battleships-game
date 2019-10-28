@@ -126,6 +126,9 @@ class Ai(Player):
             self.shot_left()
         if self.shot in self.coords_to_shoot:
             self.coords_to_shoot.remove(self.shot)
+    
+    def update_shot(self):
+        self.shot = self.shot[0] + str(int(self.shot[1:]) + 1)
 
     def __init__(self):
         super().__init__()
@@ -150,6 +153,7 @@ def main():
             player_1.previous_hit = player_1.previous_shot
             player_1.previous_hits.append(player_1.previous_shot)
             player_1.hunt()
+            player_1.update_shot()
             print(player_2.ship_list)
             print(f'Previous hit: {player_1.previous_hit}, shot: {player_1.shot}, previous hits: {player_1.previous_hits}\n')
             player_1.print_map(player_1.shot_grid)

@@ -149,11 +149,12 @@ def main():
         if any([player_1.previous_shot in key for key in player_2.ship_list]):
             player_1.previous_hit = player_1.previous_shot
             player_1.previous_hits.append(player_1.previous_shot)
-            player_1.check_directions()
-            print(player_1.previous_hit, player_1.directions)
-            print(player_1.ship_list)
+            player_1.hunt()
+            print(player_2.ship_list)
+            print(f'Previous hit: {player_1.previous_hit}, shot: {player_1.shot}, previous hits: {player_1.previous_hits}\n')
             player_1.print_map(player_1.shot_grid)
-            # time.sleep(10)
+            player_2.print_map(player_2.ship_grid)
+            time.sleep(10)
         else:
             player_1.random_shooting()
         player_1.update_map(player_2.ship_grid, player_2.ship_list)
